@@ -170,12 +170,6 @@ tasks:
     ref: main
     dest: ./tmp/addons/esx_policejob
     
-  ## Add chat theme
-  - action: download_github
-    src: https://github.com/Concept-Collective/cc-theme
-    ref: main
-    dest: ./resources/cc-theme
-    
   ## Add ox_core and ox_police with proper dependencies
   - action: download_github
     src: https://github.com/overextended/ox_core
