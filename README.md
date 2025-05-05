@@ -31,7 +31,7 @@ This is the official recipe for D&D Development's ESX Framework server base. Cre
 - dnd-notify (custom notification system)
 - esx_ambulancejob (Emergency Medical Services)
 - esx_policejob (Law Enforcement)
-- esx_chat with GTAO theme (Stylish chat interface)
+- cc-chat with official GTAO chat theme (Modern stylish chat interface)
 
 ## Installation
 

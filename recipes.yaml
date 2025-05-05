@@ -18,6 +18,13 @@ tasks:
     ref: master
     subpath: resources
     dest: ./resources/[cfx-default]
+    
+  ## Download additional gameplay resources for chat theme
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
+    ref: master
+    subpath: resources/[gameplay]/chat-theme-gtao
+    dest: ./resources/[gameplay]/chat-theme-gtao
 
   ## Remove problematic FiveM default resources immediately
   - action: remove_path
@@ -165,9 +172,9 @@ tasks:
     
   ## Add chat theme
   - action: download_github
-    src: https://github.com/AvarianKnight/chat-theme-gtao
-    ref: master
-    dest: ./resources/chat-theme-gtao
+    src: https://github.com/Concept-Collective/cc-theme
+    ref: main
+    dest: ./resources/cc-theme
     
   ## Add ox_core and ox_police with proper dependencies
   - action: download_github
