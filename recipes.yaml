@@ -153,7 +153,7 @@ tasks:
     
   ## Add custom chat UI
   - action: download_github
-    src: https://github.com/esx-framework/esx_chat
+    src: https://github.com/Concept-Collective/cc-chat
     ref: main
     dest: ./tmp/addons/esx_chat
     
