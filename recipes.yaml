@@ -80,28 +80,12 @@ tasks:
     dest: ./resources/[ox]/ox_target
 
   ## ox_doorlock
-  - action: download_github
-    src: https://github.com/overextended/ox_doorlock
-    ref: main
+  - action: download_file
+    url: https://github.com/overextended/ox_doorlock/releases/latest/download/ox_doorlock.zip
+    path: ./tmp/ox_doorlock.zip
+  - action: unzip
+    src: ./tmp/ox_doorlock.zip
     dest: ./resources/[ox]/ox_doorlock
-
-  ## ox_banking
-  - action: download_github
-    src: https://github.com/overextended/ox_banking
-    ref: main
-    dest: ./resources/[ox]/ox_banking
-
-  ## ox_core
-  - action: download_github
-    src: https://github.com/overextended/ox_core
-    ref: main
-    dest: ./resources/[ox]/ox_core
-
-  ## ox_police
-  - action: download_github
-    src: https://github.com/overextended/ox_police
-    ref: main
-    dest: ./resources/[ox]/ox_police
 
   ## Download essential ESX addons
   - action: download_github
@@ -183,6 +167,24 @@ tasks:
     path: ./tmp
   - action: remove_path
     path: ./resources/[esx_addons]/esx_policejob
+    
+  ## Remove problematic FiveM default resources
+  - action: remove_path
+    path: ./resources/[cfx-default]/basic-gamemode
+  - action: remove_path
+    path: ./resources/[cfx-default]/fivem-map-hipster
+  - action: remove_path
+    path: ./resources/[cfx-default]/fivem-map-skater
+  - action: remove_path
+    path: ./resources/[cfx-default]/mapmanager
+
+  ## Fixing ox resources that have issues
+  - action: remove_path
+    path: ./resources/[ox]/ox_banking
+  - action: remove_path
+    path: ./resources/[ox]/ox_core
+  - action: remove_path
+    path: ./resources/[ox]/ox_police
 
   ## Create server.cfg
   - action: download_file
