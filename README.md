@@ -7,8 +7,9 @@ This is the official recipe for D&D Development's ESX Framework server base. Cre
 - Complete ESX Legacy base setup
 - Pre-configured with Overextended resources (ox_inventory, ox_lib, etc.)
 - Custom notification system (dnd-notify)
+- Hungarian language support
 - Removed unnecessary ESX resources
-- Pre-configured server.cfg
+- Pre-configured server.cfg with txAdmin template variables
 
 ## Resources Included
 
@@ -22,14 +23,15 @@ This is the official recipe for D&D Development's ESX Framework server base. Cre
 - ox_lib
 - ox_inventory
 - ox_doorlock
-- ox_banking
-- ox_core
 - ox_target
 - ox_mysql
 - ox_police (replaces esx_policejob)
 
 ### Additional Resources
 - dnd-notify (custom notification system)
+- esx_ambulancejob (Emergency Medical Services)
+- esx_policejob (Law Enforcement)
+- esx_chat with GTAO theme (Stylish chat interface)
 
 ## Installation
 
@@ -51,9 +53,11 @@ This is the official recipe for D&D Development's ESX Framework server base. Cre
 - Database name: es_extended
 - Default server name: D&D Development
 - Default server port: 30120
+- Default language: Hungarian (hu-HU)
 
 ## Customization
-- Edit server.cfg to change server name, player slots, etc.
+- The recipe uses txAdmin template variables for easy customization
+- The server.cfg will be automatically configured during deployment
 - Add your Steam API key and license key
 - Modify the admin identifier in server.cfg
 

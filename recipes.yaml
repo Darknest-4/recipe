@@ -8,12 +8,32 @@ description: D&D Development - ESX Legacy Recipe
 creationDate: 2025.05.05
 
 tasks:
+  ## Create the necessary folders first
+  - action: waste_time
+    seconds: 1
+    
   ## Download default CFX resources
   - action: download_github
     src: https://github.com/citizenfx/cfx-server-data
     ref: master
     subpath: resources
     dest: ./resources/[cfx-default]
+
+  ## Remove problematic FiveM default resources immediately
+  - action: remove_path
+    path: ./resources/[cfx-default]/basic-gamemode
+  - action: remove_path
+    path: ./resources/[cfx-default]/fivem-map-hipster
+  - action: remove_path
+    path: ./resources/[cfx-default]/fivem-map-skater
+  - action: remove_path
+    path: ./resources/[cfx-default]/mapmanager
+  - action: remove_path
+    path: ./resources/[cfx-default]/redm-map-one
+  - action: remove_path
+    path: ./resources/[cfx-default]/webpack
+  - action: remove_path
+    path: ./resources/[cfx-default]/sessionmanager-rdr3
 
   ## bob74_ipl
   - action: download_github
@@ -74,10 +94,12 @@ tasks:
     dest: ./resources/[ox]
 
   ## ox_target
-  - action: download_github
-    src: https://github.com/overextended/ox_target
-    ref: main
-    dest: ./resources/[ox]/ox_target
+  - action: download_file
+    url: https://github.com/overextended/ox_target/releases/latest/download/ox_target.zip
+    path: ./tmp/ox_target.zip
+  - action: unzip
+    src: ./tmp/ox_target.zip
+    dest: ./resources/[ox]
 
   ## ox_doorlock
   - action: download_file
@@ -85,7 +107,7 @@ tasks:
     path: ./tmp/ox_doorlock.zip
   - action: unzip
     src: ./tmp/ox_doorlock.zip
-    dest: ./resources/[ox]/ox_doorlock
+    dest: ./resources/[ox]
 
   ## Download essential ESX addons
   - action: download_github
@@ -122,6 +144,41 @@ tasks:
     src: https://github.com/esx-framework/esx_status
     ref: main
     dest: ./tmp/addons/esx_status
+
+  ## Add ambulance job
+  - action: download_github
+    src: https://github.com/esx-framework/esx_ambulancejob
+    ref: main
+    dest: ./tmp/addons/esx_ambulancejob
+    
+  ## Add custom chat UI
+  - action: download_github
+    src: https://github.com/esx-framework/esx_chat
+    ref: main
+    dest: ./tmp/addons/esx_chat
+    
+  ## Add police job
+  - action: download_github
+    src: https://github.com/esx-framework/esx_policejob
+    ref: main
+    dest: ./tmp/addons/esx_policejob
+    
+  ## Add chat theme
+  - action: download_github
+    src: https://github.com/AvarianKnight/chat-theme-gtao
+    ref: master
+    dest: ./resources/chat-theme-gtao
+    
+  ## Add ox_core and ox_police with proper dependencies
+  - action: download_github
+    src: https://github.com/overextended/ox_core
+    ref: main
+    dest: ./resources/[ox]/ox_core
+    
+  - action: download_github
+    src: https://github.com/overextended/ox_police
+    ref: main
+    dest: ./resources/[ox]/ox_police
 
   - action: waste_time # prevent github throttling
     seconds: 5
@@ -167,24 +224,6 @@ tasks:
     path: ./tmp
   - action: remove_path
     path: ./resources/[esx_addons]/esx_policejob
-    
-  ## Remove problematic FiveM default resources
-  - action: remove_path
-    path: ./resources/[cfx-default]/basic-gamemode
-  - action: remove_path
-    path: ./resources/[cfx-default]/fivem-map-hipster
-  - action: remove_path
-    path: ./resources/[cfx-default]/fivem-map-skater
-  - action: remove_path
-    path: ./resources/[cfx-default]/mapmanager
-
-  ## Fixing ox resources that have issues
-  - action: remove_path
-    path: ./resources/[ox]/ox_banking
-  - action: remove_path
-    path: ./resources/[ox]/ox_core
-  - action: remove_path
-    path: ./resources/[ox]/ox_police
 
   ## Create server.cfg
   - action: download_file
