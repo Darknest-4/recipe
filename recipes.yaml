@@ -1,0 +1,190 @@
+$engine: 3
+$minFxVersion: 13165
+$onesync: on
+name: dnd_esx_recipe_20250505
+version: 1.0.0
+author: Darknest_4
+description: D&D Development - ESX Legacy Recipe
+creationDate: 2025.05.05
+
+tasks:
+  ## Download default CFX resources
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
+    ref: master
+    subpath: resources
+    dest: ./resources/[cfx-default]
+
+  ## bob74_ipl
+  - action: download_github
+    src: https://github.com/Bob74/bob74_ipl
+    ref: master
+    dest: ./resources/bob74_ipl
+
+  - action: connect_database
+    database: es_extended
+
+  ## Download esx core
+  - action: download_github
+    src: https://github.com/esx-framework/esx-core
+    ref: main
+    dest: ./tmp/core
+
+  - action: move_path
+    src: ./tmp/core/[core]
+    dest: ./resources/[core]
+    
+  ## Configure es_extended for ox_inventory
+  - action: replace_string
+    file: ./resources/[core]/es_extended/shared/config/main.lua
+    search: 'Config.CustomInventory = false'
+    replace: 'Config.CustomInventory = "ox"'
+
+  - action: query_database
+    file: ./tmp/core/[SQL]/legacy.sql
+
+  ## Download dnd-notify directly (this will create the [scripts] directory)
+  - action: download_github
+    src: https://github.com/Darknest-4/dnd-notify
+    ref: main
+    dest: ./resources/[scripts]/dnd-notify
+
+  ## oxmysql
+  - action: download_file
+    url: https://github.com/overextended/oxmysql/releases/latest/download/oxmysql.zip
+    path: ./tmp/oxmysql.zip
+  - action: unzip
+    src: ./tmp/oxmysql.zip
+    dest: ./resources/[ox]
+
+  ## ox_lib
+  - action: download_file
+    url: https://github.com/overextended/ox_lib/releases/latest/download/ox_lib.zip
+    path: ./tmp/ox_lib.zip
+  - action: unzip
+    src: ./tmp/ox_lib.zip
+    dest: ./resources/[ox]
+
+  ## ox_inventory
+  - action: download_file
+    url: https://github.com/overextended/ox_inventory/releases/latest/download/ox_inventory.zip
+    path: ./tmp/ox_inventory.zip
+  - action: unzip
+    src: ./tmp/ox_inventory.zip
+    dest: ./resources/[ox]
+
+  ## ox_target
+  - action: download_github
+    src: https://github.com/overextended/ox_target
+    ref: main
+    dest: ./resources/[ox]/ox_target
+
+  ## ox_doorlock
+  - action: download_github
+    src: https://github.com/overextended/ox_doorlock
+    ref: main
+    dest: ./resources/[ox]/ox_doorlock
+
+  ## ox_banking
+  - action: download_github
+    src: https://github.com/overextended/ox_banking
+    ref: main
+    dest: ./resources/[ox]/ox_banking
+
+  ## ox_core
+  - action: download_github
+    src: https://github.com/overextended/ox_core
+    ref: main
+    dest: ./resources/[ox]/ox_core
+
+  ## ox_police
+  - action: download_github
+    src: https://github.com/overextended/ox_police
+    ref: main
+    dest: ./resources/[ox]/ox_police
+
+  ## Download essential ESX addons
+  - action: download_github
+    src: https://github.com/esx-framework/esx_addonaccount
+    ref: main
+    dest: ./tmp/addons/esx_addonaccount
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_addoninventory
+    ref: main
+    dest: ./tmp/addons/esx_addoninventory
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_datastore
+    ref: main
+    dest: ./tmp/addons/esx_datastore
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_service
+    ref: main
+    dest: ./tmp/addons/esx_service
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_license
+    ref: main
+    dest: ./tmp/addons/esx_license
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_society
+    ref: main
+    dest: ./tmp/addons/esx_society
+
+  - action: download_github
+    src: https://github.com/esx-framework/esx_status
+    ref: main
+    dest: ./tmp/addons/esx_status
+
+  - action: waste_time # prevent github throttling
+    seconds: 5
+
+  - action: move_path
+    src: ./tmp/addons/
+    dest: ./resources/[esx_addons]
+
+  ## pma-voice
+  - action: download_github
+    src: https://github.com/AvarianKnight/pma-voice
+    ref: main
+    dest: ./resources/pma-voice
+
+  ## illenium-appearance (replacement for esx_skin/skinchanger)
+  - action: download_file
+    url: https://github.com/iLLeniumStudios/illenium-appearance/releases/latest/download/illenium-appearance.zip
+    path: ./tmp/illenium-appearance.zip
+  - action: unzip
+    src: ./tmp/illenium-appearance.zip
+    dest: ./resources
+
+  - action: query_database
+    file: ./resources/illenium-appearance/sql/management_outfits.sql
+
+  - action: query_database
+    file: ./resources/illenium-appearance/sql/player_outfit_codes.sql
+
+  - action: query_database
+    file: ./resources/illenium-appearance/sql/player_outfits.sql
+
+  - action: query_database
+    file: ./resources/illenium-appearance/sql/playerskins.sql
+
+  ## Remove unwanted ESX resources
+  - action: remove_path
+    path: ./resources/[core]/esx_skin
+  - action: remove_path
+    path: ./resources/[core]/skinchanger
+  - action: remove_path
+    path: ./resources/[core]/esx_multicharacter
+  - action: remove_path
+    path: ./tmp
+  - action: remove_path
+    path: ./resources/[esx_addons]/esx_policejob
+
+  ## Create server.cfg
+  - action: download_file
+    url: https://raw.githubusercontent.com/Darknest-4/recipe/main/main/server.cfg
+    path: ./server.cfg
