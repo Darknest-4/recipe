@@ -1,11 +1,11 @@
 $engine: 3
 $minFxVersion: 13165
 $onesync: on
-name: dnd_esx_recipe_20250505
-version: 1.0.0
+name: dnd_esx_recipe_enhanced_20250510
+version: 2.0.0
 author: Darknest_4
-description: D&D Development - ESX Legacy Recipe
-creationDate: 2025.05.05
+description: D&D Development - Enhanced ESX Legacy Recipe with Extended Features
+creationDate: 2025.05.10
 
 tasks:
   ## Create the necessary folders first
@@ -157,13 +157,7 @@ tasks:
     src: https://github.com/esx-framework/esx_ambulancejob
     ref: main
     dest: ./tmp/addons/esx_ambulancejob
-    
-  ## Add custom chat UI
-  - action: download_github
-    src: https://github.com/Concept-Collective/cc-chat
-    ref: main
-    dest: ./tmp/addons/esx_chat
-    
+
   ## Add police job
   - action: download_github
     src: https://github.com/esx-framework/esx_policejob
@@ -175,11 +169,7 @@ tasks:
     src: https://github.com/overextended/ox_core
     ref: main
     dest: ./resources/[ox]/ox_core
-    
-  - action: download_github
-    src: https://github.com/overextended/ox_police
-    ref: main
-    dest: ./resources/[ox]/ox_police
+
 
   - action: waste_time # prevent github throttling
     seconds: 5
@@ -214,17 +204,91 @@ tasks:
   - action: query_database
     file: ./resources/illenium-appearance/sql/playerskins.sql
 
-  ## Remove unwanted ESX resources
-  - action: remove_path
-    path: ./resources/[core]/esx_skin
-  - action: remove_path
-    path: ./resources/[core]/skinchanger
-  - action: remove_path
-    path: ./resources/[core]/esx_multicharacter
+  ## Keep and enhance these important ESX resources
+  # Instead of removing skinchanger and esx_skin, we keep them for compatibility
+  - action: waste_time
+    seconds: 1
+    
+  ## Download additional ESX resources
+  - action: download_github
+    src: https://github.com/esx-framework/esx_vehicleshop
+    ref: main
+    dest: ./resources/[esx_addons]/esx_vehicleshop
+    
+  - action: download_github
+    src: https://github.com/esx-framework/esx_mechanicjob
+    ref: main
+    dest: ./resources/[esx_addons]/esx_mechanicjob
+    
+  - action: download_github
+    src: https://github.com/esx-framework/esx_taxijob
+    ref: main
+    dest: ./resources/[esx_addons]/esx_taxijob
+    
+  - action: download_github
+    src: https://github.com/esx-framework/esx_barbershop
+    ref: main
+    dest: ./resources/[esx_addons]/esx_barbershop
+    
+  - action: download_github
+    src: https://github.com/esx-framework/esx_clotheshop
+    ref: main
+    dest: ./resources/[esx_addons]/esx_clotheshop
+    
+  - action: download_github
+    src: https://github.com/esx-framework/esx_garage
+    ref: main
+    dest: ./resources/[esx_addons]/esx_garage
+    
+  - action: download_github
+    src: https://github.com/esx-framework/esx_weaponshop
+    ref: main
+    dest: ./resources/[esx_addons]/esx_weaponshop
+    
+  - action: download_github
+    src: https://github.com/esx-framework/esx_jobs
+    ref: main
+    dest: ./resources/[esx_addons]/esx_jobs
+    
+  - action: download_github
+    src: https://github.com/esx-framework/esx_shops
+    ref: main
+    dest: ./resources/[esx_addons]/esx_shops
+    
+  - action: download_github
+    src: https://github.com/esx-framework/esx_banking
+    ref: main
+    dest: ./resources/[esx_addons]/esx_banking
+  
+  ## Advanced scripts and utilities
+  - action: download_github
+    src: https://github.com/qbcore-framework/progressbar
+    ref: main
+    dest: ./resources/[scripts]/progressbar
+    
+  - action: download_github
+    src: https://github.com/project-error/npwd
+    ref: main
+    dest: ./resources/[scripts]/npwd
+    
+  - action: download_github
+    src: https://github.com/FiveM-Scripts/mythic_notify
+    ref: master
+    dest: ./resources/[scripts]/mythic_notify
+    
+  - action: download_github
+    src: https://github.com/Sqibbyy/sqib-scripts
+    ref: main
+    dest: ./resources/[scripts]/sqib-scripts
+    
+  - action: download_github
+    src: https://github.com/HalCroves/mythic_progbar
+    ref: main
+    dest: ./resources/[scripts]/mythic_progbar
+    
+  ## Remove only temporary files and keep esx_policejob
   - action: remove_path
     path: ./tmp
-  - action: remove_path
-    path: ./resources/[esx_addons]/esx_policejob
 
   ## Create server.cfg
   - action: download_file
