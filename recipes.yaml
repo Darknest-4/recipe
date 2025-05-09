@@ -265,12 +265,7 @@ tasks:
     src: https://github.com/qbcore-framework/progressbar
     ref: main
     dest: ./resources/[scripts]/progressbar
-    
-  - action: download_github
-    src: https://github.com/project-error/npwd
-    ref: main
-    dest: ./resources/[scripts]/npwd
-    
+
   - action: download_github
     src: https://github.com/FiveM-Scripts/mythic_notify
     ref: master
